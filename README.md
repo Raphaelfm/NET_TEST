@@ -1,3 +1,111 @@
+# Requirements
+
+-- .NET 8 SDK
+-- Postgre SQL database
+
+## Dependencies Restore
+
+-- To restore de dependencies in this project, execute the command: dotnet restore on folder backend
+
+# Apply Migrations
+
+-- Run the following commands to apply the database schema:
+-- dotnet ef database update \
+  -p src/Ambev.DeveloperEvaluation.ORM/Ambev.DeveloperEvaluation.ORM.csproj \
+  -s src/Ambev.DeveloperEvaluation.WebApi/Ambev.DeveloperEvaluation.WebApi.csproj
+
+## If you're using Visual Studio:
+
+-- Set up the inicialization and default project as: Ambev.DeveloperEvaluation.WebApi
+-- Run the following command on dotnet cli or on the package manager console to apply the database schema:
+-- update-database
+
+# Running the project:
+
+-- If you are using Visual Studio Code, run the following command: dotnet watch run
+-- If you are using Visual Studio press the run button after define Ambev.DeveloperEvaluation.WebApi as inicialization program.
+
+## Api will run in the adress: https://localhost:7181/swagger/index.html
+
+# How to Test the API
+
+## Use Postman, Swagger, or any REST client to interact with the endpoints below.
+
+### 1. Create sale with 3 items (no discount)
+
+POST /api/sales
+{
+  "customerName": "João da Silva",
+  "branchName": "Loja 01",
+  "items": [
+    { "productName": "Refrigerante", "quantity": 3, "unitPrice": 100 }
+  ]
+}
+
+
+### 2. Create sale with 5 items (10% of discount)
+
+POST /api/sales
+{
+  "customerName": "Maria Lima",
+  "branchName": "Loja 02",
+  "items": [
+    { "productName": "Suco", "quantity": 5, "unitPrice": 200 }
+  ]
+}
+
+
+
+ ### 3. Create sale with 12 items (20% of discount)
+ 
+ POST /api/sales
+{
+  "customerName": "Carlos Neto",
+  "branchName": "Loja 03",
+  "items": [
+    { "productName": "Cerveja", "quantity": 12, "unitPrice": 250 }
+  ]
+}
+
+
+
+### 4. Create sale with 21 items (should show an error)
+
+POST /api/sales
+{
+  "customerName": "Joana Costa",
+  "branchName": "Loja 04",
+  "items": [
+    { "productName": "Agua", "quantity": 21, "unitPrice": 50 }
+  ]
+}
+
+
+
+### 5. Update existing sale
+
+PUT /api/sales/{id}
+{
+  "customerName": "João Atualizado",
+  "branchName": "Loja Central",
+  "items": [
+    { "productName": "H2O", "quantity": 4, "unitPrice": 120, "id" : "item id (guid)" }
+  ]
+}
+
+
+
+### 6. Cancel a sale (Will change the status to 1 )
+PATCH /api/sales/{id}/cancel
+
+### Get All Sales
+
+GET /api/sales
+
+### Get Sale by ID
+
+GET /api/sales/{id}
+
 # Developer Evaluation Project
 
 `READ CAREFULLY`
